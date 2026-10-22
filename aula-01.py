@@ -10,6 +10,7 @@ import yfinance as yf
 def carregar_dados(empresa):
     dados_acao = yf.Ticker(empresa)
     cotacoes_acao = dados_acao.history(start="2010-01-01", end="2024-07-01")
+    cotacoes_acao = cotacoes_acao[["Close"]]
     return cotacoes_acao
 
 dados = carregar_dados("ITUB4.SA")
@@ -22,3 +23,6 @@ st.write("""
     # App Preço de Ações
     O gráfico abaixo representa a evolução do preçodas ações do Itau (ITUB4) ao logo dos anos.
 """)
+
+# Criar grafico
+st.line_chart(dados)
